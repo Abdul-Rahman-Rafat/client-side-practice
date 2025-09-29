@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>assignment</title>
+</head>
+<body>
+    
+<h1>assignment 3</h1>
+
+<button onclick="openWindow()"> openWindow   </button>
+
+<button onclick="reload_after5sec()"> reload_after_5sec   </button>
+
+<div id="screenInfo">Screen size will appear here. <p> hh</p></div>
+
+<a href="#" onclick="chnage_link()"> link hahahahahahaha   </a>
+<button onclick="cancelchange()"> cancel change   </button>
+
+<hr> <hr>
+
+
+    <button onclick="reloadpage()">title to time </button>
+    <button onclick="stopreloadpage()">Stop it</button>
+
+<hr><hr>    
+<ul id="container" class="firstChild">
+    <li class="firstElementChild">1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+
+
+
+
+    <script>
+        //q1
+         var newWin;
+      function openWindow() {
+        newWin = window.open("newWindow.html", "", "width=500, height=500");
+         // بعد 3 ثواني (3000 ملي ثانية) يتقفل
+      setTimeout(function() {
+        if (newWin && !newWin.closed) {
+          newWin.close();
+        }
+      }, 3000);
+      }
+
+
+        //q2
+        <!-- alert(navigator.userAgent); -->
+
+
+        //q3
+              function reload_after5sec(){
+        // بعد 5 ثواني (5000 ملي ثانية) هيعمل reload للصفحة
+            setTimeout(function() {
+              location.reload();
+            }, 5000);
+              }
+
+        
+        //q4
+      console.log(navigator.onLine)
+
+
+        //q5
+     console.log(location.href)
+     console.log(location.protocol)
+     console.log(location.hostname)
+
+
+     //q6
+     history.back()         
+     history.forward()
+
+     //q7
+             document.childNodes[1].childNodes[2].childNodes[7].textContent=screen.availWidth + ' x ' + screen.availHeight
+
+
+      //q8
+              function showMessage(){
+                  document.childNodes[1].childNodes[2].childNodes[9].textContent="don't laugh"
+
+              }            
+              function chnage_link(){
+                timeoutId = setTimeout(showMessage, 3000);
+              }
+                function cancelchange() {
+                        clearTimeout(timeoutId);
+                    }
+
+
+      //q9
+
+                            
+            function reloadpage(){
+                intervalId = setInterval(function() {
+               const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.title = timeString; // تحديث عنوان الصفحة
+                }, 1000);
+            }
+
+            function stopreloadpage(){
+                clearInterval(intervalId);
+            }
+
+
+            //q10
+        // str=   confirm("wanna to continue")
+        // console.log("user says " , str )
+
+
+                    //q11
+        console.log(document.childNodes[1].childNodes[2].childNodes[24].children)
+        console.log(document.childNodes[1].childNodes[2].childNodes[24].childNodes)
+        // children array without text
+
+    // Function to log tag names of all direct child elements of <body>
+    function logBodyChildTagNames() {
+      var children = document.body.children;
+      for (var i = 0; i < children.length; i++) {
+        console.log(children[i].tagName);
+      }
+    }
+            //q12
+        logBodyChildTagNames()
+
+        //q13
+    function logElementChildNodes(parent) {
+      var nodes = parent.childNodes;
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].nodeType === 1) { 
+          console.log(nodes[i].tagName);
+        }
+      }
+    }
+    console.log("-----")
+    logElementChildNodes(document.childNodes[1])
+
+    //q14
+    var container = document.getElementById('container');
+    console.log('firstChild:', container.firstChild); 
+    console.log('firstElementChild:', container.firstElementChild);
+    // Difference: 
+    // firstChild returns the first child node of any type (text, comment, element)
+    //
+    //  firstElementChild returns only the first child that is an element node.
+console.log("-----")
+
+    //q15
+    var ul = document.querySelector('ul');
+    var liElements = ul.children; 
+    console.log(liElements);
+    // Difference:
+    // ul.childNodes returns all child nodes ( text, comments)
+    //
+    // while ul.children returns only element nodes (like <li>).
+console.log("-----")
+    //q17
+    function logSiblingElements(elem) {
+      var siblings = elem.parentElement.children;
+      for (var i = 0; i < siblings.length; i++) {
+        if (siblings[i] !== elem && siblings[i].nodeType === 1) {
+          console.log(siblings[i]);
+        }
+      }
+    }
+   logSiblingElements(document.childNodes[1].childNodes[1]);
+
+    //q18
+    var ulNode = document.getElementById('container');
+    var node = ulNode.firstChild;
+    while (node) {
+      console.log('nextSibling:', node);
+      node = node.nextSibling;
+    }
+    //q19
+    var elem = ulNode.firstElementChild;
+    while (elem) {
+      console.log('nextElementSibling:', elem);
+      elem = elem.nextElementSibling;
+    }
+
+
+    //q19
+    function countElementChildren(node) {
+      var count = 0;
+      var child = node.firstChild;
+      while (child) {
+        if (child.nodeType === 1) count++;
+        child = child.nextSibling;
+      }
+      return count;
+    }
+    console.log("Element children count of #container:", countElementChildren(document.getElementById('container')));
+
+    //q20
+    function logFormInputs() {
+      var form = document.forms[0];
+      if (!form) return;
+      for (var i = 0; i < form.elements.length; i++) {
+        var el = form.elements[i];
+        if (el.tagName === "INPUT") {
+          console.log("Name:", el.name, "Value:", el.value);
+        }
+      }
+    }
+
+    //q21
+    for (var i = 0; i < document.forms.length; i++) {
+      console.log("Form name:", document.forms[i].name);
+    }
+
+    //q22
+    for (var i = 0; i < document.images.length; i++) {
+      console.log("Image src:", document.images[i].src);
+    }
+
+    //q23
+    function disableFormInputs(form) {
+      for (var i = 0; i < form.elements.length; i++) {
+        var el = form.elements[i];
+        if (el.tagName === "INPUT") {
+          el.disabled = true;
+        }
+      }
+    }
+
+    //q24
+    var wideImages = Array.from(document.images).filter(function(img) {
+      return img.width > 100;
+    });
+    console.log("Images with width > 100px:", wideImages);
+
+
+    //q25
+    var newForm = document.createElement('form');
+    newForm.innerHTML = '<input type="text" name="newInput" value="Hello World">';
+    document.body.appendChild(newForm);
+    console.log("New form added:", newForm);
+
+    //q26
+    var forms = document.forms;
+    if (forms.length > 0) {
+      var lastForm = forms[forms.length - 1];
+      lastForm.parentNode.removeChild(lastForm);
+      console.log("Last form removed:", lastForm);
+    }
+
+    //q27
+    console.log("Current URL:", location.href);
+    console.log("Protocol:", location.protocol);
+    console.log("Host:", location.host);
+    console.log("Hostname:", location.hostname);
+    console.log("Port:", location.port);
+    console.log("Pathname:", location.pathname);
+    console.log("Search:", location.search);
+    console.log("Hash:", location.hash);
+
+    //q28
+    location.hash = "newHash";
+    console.log("Hash changed to:", location.hash);
+
+    //q29
+    function navigateAfterDelay(url, delay) {
+      setTimeout(function() {
+        location.href = url;
+      }, delay);
+    }
+
+    //q30
+    console.log("Referrer URL:", document.referrer);
+
+    //q31
+    if (location.protocol === 'https:') {
+      console.log("Document is loaded over HTTPS");
+    } else {
+      console.log("Document is not loaded over HTTPS");
+    }
+
+    //q32
+    function openWindowAndNavigate(url) {
+      var win = window.open();
+      win.location.href = url;
+    }
+
+    //q33
+    console.log("User agent string:", navigator.userAgent);
+
+    //q34
+    function printMessageWithDate(message) {
+      var now = new Date();
+      console.log(message + " " + now.toString());
+    }
+
+    //q35
+    console.log("Current date and time (ISO):", new Date().toISOString());
+
+    //q36
+    console.log("Current date and time (locale):", new Date().toLocaleString());
+
+
+    </script>
+</body>
+</html>

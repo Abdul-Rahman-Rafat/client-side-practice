@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap');
+body{
+
+    background-image: url(assets/backG.jpg);
+    background-size:cover ;
+    background-repeat: no-repeat;
+}
+.social_search_phones_container_class{
+    width: 100%;
+    background-color: #212e50;
+    border-radius: 8px;
+}
+
+.phones_class{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
+    color: #fff;
+    left: 7%;
+    display: inline-block;
+}
+.social_class{
+    position: relative;
+    display: inline;
+    left: 67%;
+    top: .75rem;
+}
+.social_icons{
+   
+    width: 2.5%;
+}
+.social_icons:hover{
+    transition: 500ms;
+    width: 3%;
+}
+
+.search_class{
+     position: relative;
+    display: inline;
+    left: 70%;
+    top: .75rem;
+}
+
+.search_form{
+    display: inline;
+}
+.search_field{
+    width: 15%;
+    padding: .5%;
+}
+.serach_icn{
+    width: 3%;
+}
+
+.logo_class{
+font-family: 'Edu NSW ACT Cursive', cursive;
+position: relative;
+display: inline-block;
+left: 7%;
+font-size: 2rem;
+color: #fff;
+}
+.logo_class:hover{
+    transition: 500ms;
+    font-size: 2.5rem;
+}
+
+
+/* 
+ */
+
+ 
+.nav_bar_class{
+display: inline;
+position: relative ;
+width: 99%;
+z-index: 999;
+left: 2rem;
+
+}
+
+.nav_bar_ul_class{
+    position: relative;
+display: inline;
+list-style-type: none;
+margin: 0;
+padding: 0;
+left: 15%;
+
+}
+.nav_bar_class li {
+    color: white;
+    font-size: 1.5rem;
+    padding: 1%;
+
+}
+li:hover{
+
+    background-color: #1b2746;
+
+}
+li {
+    display: inline-block;
+}
+
+
+a{
+    text-decoration: none;
+    color: azure;
+}
+
+
+.content_class{
+
+    position: relative;
+}
+.content_class {
+
+    position: relative;
+        top: 12rem;
+    display: inline;
+}
+
+.left_content_class{
+ position: relative;
+       
+    display: inline-block;
+    top: 6rem;
+}
+.center_content_class{
+ position: relative;
+       left: 20rem;
+    display: inline;
+    width: 5rem;
+}
+.right_content_class{
+ position: relative;
+        bottom: 10rem;
+    display: inline-block;
+    left: 88rem;
+}
+.btnlearn{
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+}

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ass4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <h1>Day4 DOM</h1>
+    <div id="my-div">
+      <p id="my-p">Hello ISI</p>
+    </div>
+    <form action="test.html">
+      <input type="text" id="my-input" placeholder="Type something..." />
+      <input
+        type="email"
+        name="user-email"
+        id="my-email"
+        placeholder="Type your email..."
+      />
+      <select name="user-country" id="myselect">
+        <option value="us">United States</option>
+        <option value="EG">Egypt</option>
+        <option value="uk">United Kingdom</option>
+      </select>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <div class="target-div" id="div-2">
+      <h3>create element using js</h3>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        reiciendis!
+      </p>
+    </div>
+
+
+<div class="imagesslide">
+
+  <img id="imgss" src="1.jpg" style="width: 20rem;"> <br>
+        <button type="button" onclick="next_img()">next</button>
+        <button type="button" onclick="prev_img()">prev</button>
+        <button type="button" onclick="start_img()">start</button>
+        <button type="button" onclick="stop_img()">stop</button>
+
+
+</div>
+
+<div id="wrapper"></div>
+
+
+<script>
+//q1
+console.log(document.getElementsByTagName("div")[0]);
+
+//q2
+console.log(document.getElementById("my-p").textContent="Hello DOM");
+
+//q3
+console.log(document.querySelector(".target-div").childNodes);
+
+//q4
+console.log(document.querySelectorAll("div").length) 
+
+//q5
+document.getElementsByName("user-email")[0].value = "user@test.com";
+
+//q6
+if(!(document.querySelector("[type = text]").hasAttribute("name")))
+{
+document.querySelector("[type = text]").setAttribute("name","user-name")
+}
+
+//q7
+document.getElementById("my-p").textContent+="hhh"
+
+//q8
+var images = ["1.jpg", "2.jpg", "3.jpg"];
+var currentIndex = 0;
+var intervalId = null;
+
+function show_img(idx) {
+  const img = document.getElementById("imgss");
+  img.src = images[idx];
+}
+
+function next_img() {
+  currentIndex = (currentIndex + 1) % images.length;
+  show_img(currentIndex);
+}
+
+function prev_img() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  show_img(currentIndex);
+}
+
+function slide() {
+  next_img();
+}
+
+function start_img() {
+  if (!intervalId) {
+    intervalId = setInterval(slide, 2000);
+  }
+}
+
+function stop_img() {
+  clearInterval(intervalId);
+  intervalId = null;
+}
+
+// Initialize first image
+show_img(currentIndex);
+
+
+
+
+//q9
+document.querySelector("[type = text]").setAttribute("placeholder","hhhhhhh")
+
+//q10
+if(!(document.querySelector("[type = email]").hasAttribute("required")))
+{
+document.querySelector("[type = email]").setAttribute("required",1)
+}
+
+//q11
+function getSelectedValue(selectId) {
+  var select = document.getElementById(selectId);
+  return select ? select.value : null;
+}
+console.log(getSelectedValue("myselect"));
+
+
+
+console.log("--------------------");
+//q12
+var select = document.getElementById("myselect").options;
+for (var i = 0; i < select.length; i++) {
+  console.log(select[i].value);
+  console.log(select[i].text);
+
+  //q13
+  if (select[i].value === "EG") {
+    select[i].selected = true;
+  }
+}
+
+console.log("--------------------");
+
+//q14
+function selectByText(selectId, text){
+  var select = document.getElementById(selectId);
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].text === text) {
+      select.selectedIndex = i;
+      break;
+    }
+  }
+}
+selectByText("myselect","United Kingdom")
+
+
+console.log("--------------------");
+//q15
+document.getElementById("div-2").innerHTML="<p><b>Bold Text</b> 123</p>"
+
+//q16
+document.getElementById("div-2").classList.add("class_a" , "class_b")
+document.getElementById("div-2").classList.remove("class_b")
+
+//q17
+
+document.getElementById("div-2").classList.toggle("class_c")
+//document.getElementById("div-2").classList.toggle("class_c")  
+
+//q18
+function insertAfter(refNode, newNode) {
+  refNode.parentNode.insertBefore(newNode, refNode.nextSibling);
+}
+insertAfter(document.getElementById("my-p"), document.createElement("hr"));
+
+
+//q19
+//19. Create a new <div> saying "Dynamic Box" with yellow background and append inside #div-2.
+var newDiv = document.createElement("div"); 
+newDiv.textContent = "Dynamic Box";
+newDiv.style.backgroundColor = "yellow";
+document.getElementById("div-2").appendChild(newDiv);
+
+
+//q20
+var newp = document.createElement("p"); 
+newp.textContent = "new paragraph";
+var div2=document.getElementById("div-2")
+document.getElementById("div-2").insertBefore(newp,div2.firstChild);
+
+
+//q21
+var newspan = document.createElement("span"); 
+newspan.textContent = "AFTER END";
+document.getElementById("div-2").insertAdjacentHTML("afterend", newspan.outerHTML);
+// document.getElementById("div-2").insertAdjacentHTML("beforebegin", newspan.outerHTML);
+// document.getElementById("div-2").insertAdjacentHTML("afterbegin", newspan.outerHTML);
+// document.getElementById("div-2").insertAdjacentHTML("beforeend", newspan.outerHTML);
+
+
+//q22
+document.querySelector("form").onsubmit = function(event) {
+  event.preventDefault(); 
+  var textValue = document.querySelector("[type=text]").value;
+  var emailValue = document.querySelector("[type=email]").value;
+  var selectValue = document.getElementById("myselect").value;
+  console.log("Text:", textValue);
+  console.log("Email:", emailValue);
+  console.log("Select:", selectValue);
+};
+
+// q23
+document.querySelector("[type=text]").addEventListener("input", function() {
+  console.log("Input length:", this.value.length);
+});
+
+
+// q24
+function validateEmailSimple(value) {
+  return value.includes("@") && value.includes(".");
+}
+validateEmailSimple("abdo"); // false
+validateEmailSimple("abdo@"); // false
+validateEmailSimple("abdo.com"); // false
+validateEmailSimple("abdo@123.com"); // true
+
+
+// q25
+var tempElement = document.createElement("div");
+tempElement.textContent = "Temporary Element";
+document.getElementById("div-2").appendChild(tempElement);
+document.getElementById("div-2").removeChild(tempElement);
+
+
+// 25.
+var wrapper = document.getElementById("wrapper");
+
+var newElement = document.createElement("p",id="first");
+newElement.textContent = "first";
+wrapper.appendChild(newElement);
+
+var newElement2 = document.createElement("p",id="second");
+newElement2.textContent = "second";
+wrapper.appendChild(newElement2);
+ 
+
+
+
+// q26
+var originalDiv2 = document.getElementById("div-2");
+var clonedDiv2 = originalDiv2.cloneNode(true);  
+clonedDiv2.id = "div-2-clone";
+insertAfter(originalDiv2, clonedDiv2);
+
+// 27q
+function highlightInputs(form) {
+  var inputs = form.querySelectorAll("input[type='text'], input[type='email']");
+  inputs.forEach(function(input) {
+    input.style.border = "2px solid green";
+  });
+}
+document.addEventListener("DOMContentLoaded", function() {
+  var form = document.querySelector("form");
+  highlightInputs(form);
+});
+
+highlightInputs(document.querySelector("form"));
+
+// 28q
+function buildCard(title, content) {
+  var card = document.createElement("div");
+  card.className = "card";
+
+  var cardTitle = document.createElement("h3");
+  cardTitle.textContent = title;
+  card.appendChild(cardTitle);
+
+  var cardContent = document.createElement("p");
+  cardContent.textContent = content;
+  card.appendChild(cardContent);
+
+  return card;
+}
+var card1 = buildCard("Card 1", "This is the content of card 1.");
+var card2 = buildCard("Card 2", "This is the content of card 2.");
+document.body.appendChild(card1);
+
+// q29
+document.body.addEventListener("click", function(event) {
+  if (event.target.closest(".card")) {
+    console.log("Card clicked:", event.target.closest(".card").querySelector("h3").textContent);
+  }
+});
+
+
+
+// q30. Reflection (comment): Which two tasks were most challenging and why?
+//الslider w el card
+//السليدر عشان كنت محتاج افكر في الlogic بتاع التنقل بين الصور وازاي اخليها تشتغل اوتوماتيكيكي
+//والكارد عشان كنت محتاج افكر ازاي اعمل ديفا جديده وازاي اضيفها للbody وكمان ازاي اعمل event listener يكون على الbody بس يشتغل لما اضغط على الكارد بس مش على اي حاجه تانيه
+
+
+// q31. 
+var ul = document.createElement("ul");
+for (var i = 1; i <= 10; i++) {
+  var li = document.createElement("li");
+  li.textContent = "Item " + i;
+  li.className = (i % 2 === 1) ? "odd" : "even";
+  ul.appendChild(li);
+}
+document.body.appendChild(ul);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
